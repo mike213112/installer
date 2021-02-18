@@ -1,0 +1,2 @@
+sudo dpkg -i code_1.53.2-1613044664_amd64.deb;
+sudo rm -r code_1.53.2-1613044664_amd64.deb;

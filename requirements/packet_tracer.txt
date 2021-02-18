@@ -1,0 +1,3 @@
+sudo chmod +x bin/PacketTracer_800_amd64_build212_final.deb;
+sudo apt install bin/PacketTracer_800_amd64_build212_final.deb -y;
+sudo rm -r bin/PacketTracer_800_amd64_build212_final.deb;
