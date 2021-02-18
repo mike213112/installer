@@ -28,7 +28,7 @@ class Docker:
                 os.system(i)
 
 
-class Shh:
+class Ssh:
     def __init__(self,command):
         self.command = command
 

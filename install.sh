@@ -5,11 +5,6 @@
 
 #echo 'source ~/.bashrc'
 
-# Commands
-Update='sudo apt update; sudo apt upgrade -y'
-Shh='sudo apt install openssh-client openssh-server -y'
-Vim='sudo apt install vim -y'
-
 # Files
 Docker='requirements/docker.txt'
 Java='requirements/java.txt'
@@ -51,7 +46,7 @@ UpdateAndUpgrade() {
     
 from bin.funtions import UpdateAndUpgrade
 
-system_update = UpdateAndUpgrade('$1')
+system_update = UpdateAndUpgrade('sudo apt update; sudo apt upgrade -y')
 system_update.update()
 
     "
@@ -73,9 +68,9 @@ docker.install_docker()
 InstallSsh() {
     python3 -c "
     
-from bin.funtions import Shh
+from bin.funtions import Ssh
 
-ssh = Ssh('$1')
+ssh = Ssh('sudo apt install openssh-server openssh-client -y')
 ssh.install_ssh()
     "
 }
@@ -122,7 +117,7 @@ InstallVim() {
     
 from bin.funtions import Vim
 
-vim = Vim('$1')
+vim = Vim('sudo apt install vim -y')
 vim.install_vim()
 
     "
@@ -397,13 +392,13 @@ do
     if [ $opcion = 0 ]; then
         exit 0
     elif [ $opcion = 1 ]; then
-        UpdateAndUpgrade $Update
+        UpdateAndUpgrade
         echo ''
     elif [ $opcion = 2 ]; then
         InstallDocker $Docker
         echo ''
     elif [ $opcion = 3 ]; then 
-        InstallSsh $Ssh
+        InstallSsh
         echo ''
     elif [ $opcion = 4 ]; then
         InstallJava $LinkJava $Java
@@ -415,7 +410,7 @@ do
         InstallNginx $Nginx
         echo ''
     elif [ $opcion = 7 ]; then
-        InstallVim $Vim
+        InstallVim
         echo ''
     elif [ $opcion = 8 ]; then
         InstallVisualStudioCode $LinkCode $Code 
