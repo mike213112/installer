@@ -2,7 +2,7 @@ import os
 import time
 from getpass import getuser
 from mega import Mega
-from progress.spinner import Spinner
+# from progress.spinner import Spinner
 
 
 USER = getuser()
@@ -380,3 +380,68 @@ class UpdateAndUpgrade:
 
     def update(self):
         os.system(self.command)
+
+
+class Kubeamd:
+    def __init__(self,files):
+        self.files = files
+
+
+    def install_kubeamd(self):
+        file = open(self.files,'r')
+        dato = file.read()
+        datos = dato.split(';')
+
+        for i in datos:
+            os.system(i)
+
+
+class Flutter:
+    def __init__(self,url,files):
+        self.url = url
+        self.files = files
+
+
+    def install_flutter(self):
+        M.download_url(self.url)
+
+        file = open(self.files,'r')
+        dato = file.read()
+        datos = dato.split(';')
+
+        for i in datos:
+            os.system(i)
+
+
+class Dart:
+    def __init__(self,url,files):
+        self.url = url
+        self.files = files
+
+
+    def install_dart(self):
+        M.download_url(self.url)
+
+        file = open(self.files,'r')
+        dato = file.read()
+        datos = dato.split(';')
+
+        for i in datos:
+            os.system(i)
+
+
+class AndroidStudio:
+    def __init__(self,url,files):
+        self.url = url
+        self.files = files
+
+
+    def install_android_studio(self):
+        M.download_url(self.url)
+
+        file = open(self.files,'r')
+        dato = file.read()
+        datos = dato.split(';')
+
+        for i in datos:
+            os.system(i)

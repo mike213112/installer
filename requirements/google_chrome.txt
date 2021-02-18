@@ -1,2 +1,2 @@
-sudo dpkg -i bin/google-chrome-stable_current_amd64.deb;
-sudo rm -r bin/google-chrome-stable_current_amd64.deb;
+sudo dpkg -i google-chrome-stable_current_amd64.deb;
+sudo rm -r google-chrome-stable_current_amd64.deb;

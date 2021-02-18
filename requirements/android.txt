@@ -1,0 +1,4 @@
+tar -xzvf android-studio-ide-201.7042882-linux.tar.gz;
+mv android-studio-ide-201.7042882-linux /home;
+sudo rm -r android-studio-ide-201.7042882-linux.tar.gz;
+sh /home/android-studio-ide-201.7042882-linux/bin/studio.sh;
