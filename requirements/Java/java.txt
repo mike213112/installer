@@ -1,0 +1,4 @@
+sudo apt install openjdk-8-jdk openjdk-8-jre;
+tar -xzvf;
+sudo rm -r;
+sudo mv;

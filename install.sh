@@ -1,28 +1,35 @@
 #!/bin/bash
 
-#echo 'export JAVA_HOME=/usr/lib/jvm/jdk1.8.0_281' >> ~/.bashrc
-#echo 'export PATH=JAVA_HOME/bin:$PATH' >> ~/.bashrc
-
-#echo 'source ~/.bashrc'
-
 # Files
-Docker='requirements/docker.txt'
-Java='requirements/java.txt'
-DockerCompose='requirements/docker-compose.txt'
-Nginx='requirements/nginx.txt'
-Code='requirements/code.txt'
-Sublime='requirements/sublime_text.txt'
-Chrome='requirements/google_chrome.txt'
-Brave='requirements/brave.txt'
-Packet='requirements/packet_tracer.txt'
-Oh='requirements/shell.txt'
-Kubeamd='requirements/kubeadm.txt'
-Teams='requirements/teams.txt'
-Albert='requirements/albert.txt'
-Flutter='requirements/flutter.txt'
-Dart='requirements/dart.txt'
-Android='requirements/android.txt'
-
+Albert="requirements/Albert/albert.txt"
+Android="requirements/Android/android.txt"
+Brave="requirements/Brave/brave.txt"
+Chrome="requirements/Chrome/google_chrome.txt"
+Code="requirements/Code/code.txt"
+Dart="requirements/Dart/dart.txt"
+Docker="requirements/Docker/docker.txt"
+DockerCompose="requirements/DockerCompose/docker-compose.txt"
+Flutter="requirements/Flutter/flutter.txt"
+Datagrip="requirements/IntellijDatagrip/datagrip.txt"
+Idea="requirement/IntellijIdea/idea.txt"
+Phpstorm="requirements/IntellijPhpstorm/phpstorm.txt"
+Pycharm="requirements/IntellijPycharm/pycharm.txt"
+Rider="requirements/IntellijRider/rider.txt"
+Ruby="requirements/IntellijRuby/ruby.txt"
+WebStorm="requirements/IntellijWebstorm/webstorm.txt"
+Java="requirements/Java/java.txt"
+Kubeamd="requirements/Kubeadm/kubeadm.txt"
+Netbeans8="requirements/Netbeans/netbeans8.txt"
+Netbeans12="requirements/Netbeans/netbeans12.txt"
+Nginx="requirements/Nginx/nginx.txt"
+Packet="requirements/PacketTracer/packet_tracer.txt"
+Sublime="requirements/Sublime/sublime_text.txt"
+Teams="requirements/Teams/teams.txt"
+Oh="requirements/Terminal/shell.txt"
+MasterNginx="requirements/Nginx/masterip.txt"
+Nvm="requirements/Nvm/nvm.txt"
+Angular="requirements/Angular/angular.txt"
+Vue="requirements/Vuejs/vuejs.txt"
 
 # Links for Download 
 LinkJava="https://mega.nz/file/Zbo0mD7C#gkI2ZhCiuZ7M35_fHw7MaL-gY-D8zzmtahHC8jMjD9w"
@@ -107,6 +114,17 @@ from bin.funtions import Nginx
 
 nginx = Nginx('$1')
 nginx.install_nginx()
+
+    "
+}
+
+MasterIp() {
+    python3 -c "
+    
+from bin.funtions import NginxIpMaster
+    
+nginx = NginxIpMaster('$1','$2','$3')
+nginx.configure_ip()
 
     "
 }
@@ -364,6 +382,54 @@ albert.install_albert_for_ubuntu_20_04()
 }
 
 
+InstallDart() {
+    python3 -c "
+    
+from bin.funtions import Dart
+
+dart = Dart('$1')
+dart.install_dart()
+    
+    "
+}
+
+
+InstallNvm() {
+    python3 -c "
+    
+from bin.funtions import Nvm
+
+nvm = Nvm('$1')
+nvm.install_nvm()
+    
+    "
+}
+
+
+InstallAngular() {
+    python3 -c "
+    
+from bin.funtions import Angular
+
+angular = Angular('$1')
+angular.install_angular()
+
+    "
+}
+
+
+InstallVue() {
+    python3 -c "
+    
+from bin.funtions import Vue
+
+vue = Vue('$1')
+vue.install_vue()
+    
+    "
+}
+
+
 while : 
 do
     echo "Menu de opciones
@@ -386,7 +452,19 @@ do
 16. Instalar Albert para ubuntu 20.04. 
 17. Instalar Flutter.
 18. Instalar Dart. 
-19. Instalar Android Studio."
+19. Instalar Android Studio.
+20. Instalar nvm.
+21. Instalar Angular.
+22. Instalar Vuejs.
+23. Instalar Pycharm.
+24. Instalar Idea.
+25. Instalar Datagrip.
+26. Instalar Netbeans8.
+27. Instalar Netbeans12.
+28. Instalar Rider.
+29. Instalar Phpstorm.
+30. Instalar Ruby.
+31. Instalar Webstorm."
     read opcion
     
     if [ $opcion = 0 ]; then
@@ -402,12 +480,22 @@ do
         echo ''
     elif [ $opcion = 4 ]; then
         InstallJava $LinkJava $Java
+        echo 'export JAVA_HOME=/usr/lib/jvm/jdk1.8.0_281' >> ~/.bashrc
+        echo 'export PATH=/JAVA_HOME/bin:$PATH' >> ~/.bashrc
+        echo 'source ~/.bashrc'
         echo ''
     elif [ $opcion = 5 ]; then
         InstallDockerCompose $DockerCompose
         echo ''
     elif [ $opcion = 6 ]; then
         InstallNginx $Nginx
+        echo '' >> /etc/nginx/nginx.conf
+        echo 'include /etc/nginx/tcpconf.d/*;' >> /etc/nginx/nginx.conf
+        echo 'Dame la ip del primer master'
+        read master1
+        echo 'Dame la ip del segundo master'
+        read master2
+        MasterIp $master1 $master2 $MasterNginx
         echo ''
     elif [ $opcion = 7 ]; then
         InstallVim
@@ -443,7 +531,38 @@ do
         InstallFlutter $LinkFlutter $Flutter
         echo ''
     elif [ $opcion = 18 ]; then
+        InstallDart $Dart
+        echo ''
+    elif [ $opcion = 19 ]; then
         InstallAndroidStudio $LinkAndroid $Android
+        echo ''
+    elif [ $opcion = 20 ]; then
+        InstallNvm $Nvm 
+        echo `nvm install 14.15.5`
+        echo ''
+    elif [ $opcion = 21 ]; then
+        InstallAngular $Angular
+        echo ''
+    elif [ $opcion = 22 ]; then
+        InstallVue $Vue
+        echo ''
+    elif [ $opcion = 23 ]; then
+        echo ''
+    elif [ $opcion = 24 ]; then
+        echo ''
+    elif [ $opcion = 25 ]; then
+        echo ''
+    elif [ $opcion = 26 ]; then
+        echo ''
+    elif [ $opcion = 27 ]; then
+        echo ''
+    elif [ $opcion = 28 ]; then
+        echo ''
+    elif [ $opcion = 29 ]; then
+        echo ''
+    elif [ $opcion = 30 ]; then
+        echo ''
+    elif [ $opcion = 31 ]; then
         echo ''
     fi
 

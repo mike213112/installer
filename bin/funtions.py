@@ -2,7 +2,9 @@ import os
 import time
 from getpass import getuser
 from mega import Mega
-# from progress.spinner import Spinner
+from progress.spinner import Spinner
+import glob
+import sys
 
 
 USER = getuser()
@@ -44,15 +46,40 @@ class Java:
 
 
     def install_java(self):
-        M.download_url(self.url)
+        file = r'*.gz'
+        listar = glob.glob(file)
+        # print(listar)
+
+        new_file = ''
+        name_file = ''
+        pwd = os.getcwd()
 
         file = open(self.files,'r')
         dato = file.read()
         datos = dato.split(';')
 
         for i in datos:
-            os.system(i)
-
+            if 'sudo apt install' in i:
+                os.system(i)
+            if 'tar -xzvf' in i:
+                for x in listar:
+                    descomprimir = i + ' ' + x
+                    # print(listar)
+                    os.system(descomprimir)
+                    new_file = descomprimir
+                    name_file = x
+            if 'sudo rm -r' in i:
+                # listar_archivos = os.listdir()
+                # if listar in listar_archivos:
+                for y in listar:
+                    os.remove(y)
+            if 'sudo mv' in i:
+                for files in os.listdir():
+                    if 'jdk1' in files:
+                        mover = i + " " + files + " /usr/bin/jvm"
+                        os.system(mover)
+                        # print(mover)
+                        
 
 class DockerCompose:
     def __init__(self,files):
@@ -80,6 +107,40 @@ class Nginx:
 
         for i in datos:
             os.system(i)
+
+
+class NginxIpMaster:
+    def __init__(self,ip1,ip2,files):
+        self.ip1 = ip1
+        self.ip2 = ip2
+        self.files = files
+
+
+    def configure_ip(self):
+        file = open(self.files,'a')
+        line_1 = '\n\t\tserver {}:6443;$'.format(self.ip1)
+        line_2 = '\n\t\tserver {}:6443;$'.format(self.ip2)
+
+        file.write(line_1)
+        file.write(line_2)
+
+        restante = ['\n\t}$','\n\tserver {$','\n\t\tlisten 6443;$','\n\t\tlisten 443;$','\n\t\tproxy_pass kubernetes;$','\n\t}$','\n}$','\nEOF$']
+
+        for i in restante:
+            file.write(i)
+
+        file.close()
+
+        file2 = open('requirements/Nginx/masterip.txt','r')
+        data = file2.read()
+        datas = data.split('$')
+
+        varia = ''
+        for x in datas:
+            varia += x
+        
+        print(varia)
+        # os.system(varia)
 
 
 class Vim:
@@ -232,9 +293,10 @@ class Datagrip:
 
         for i in datos:
             if 'datagrip' in datos:
-                os.system(i)
+                # os.system(i)
                 move = '/home/' + USER
-            os.system(i)
+                print(move)
+            # os.systFem(i)
 
 
 class Netbeans8:
@@ -444,4 +506,46 @@ class AndroidStudio:
         datos = dato.split(';')
 
         for i in datos:
+            os.system(i)
+
+class Nvm:
+    def __init__(self,files):
+        self.files = files
+
+    
+    def install_nvm(self):
+        file = open(self.files,'r')
+        dato = file.read()
+
+        command = ''
+
+        for i in dato.split(';'):
+            command += i
+
+        os.system(command)
+
+
+class Angular:
+    def __init__(self,files):
+        self.file = files
+
+
+    def install_angular(self):
+        file = open(self.files,'r'):
+        dato = file.read()
+
+        for i in dato.split(';'):
+            os.system(i)
+
+
+class Vue:
+    def __init__(self,files):
+        self.files = files
+
+    
+    def install_vue(self):
+        file = open(self.files,'r'):
+        dato = file.read()
+
+        for i in dato.split(';'):
             os.system(i)

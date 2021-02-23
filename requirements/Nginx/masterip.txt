@@ -1,0 +1,3 @@
+cat <<EOF | sudo tee /etc/nginx/tcpconf.d/kubernetes.conf$
+stream {$
+    upstream kubernetes {$
