@@ -260,6 +260,28 @@ class Pycharm:
         for i in datos:
             os.system(i)
 
+        dir = '/home' + USER
+        move = '' 
+        archivo = ''
+
+        listar = os.listdir(dir)
+
+        for i in listar:
+            if 'Descargas' in i or 'Downloads' in i:
+                dir += '/' + i 
+
+        dir_new = os.listdir()
+
+        for i in dir_new:
+             if 'pycha' in i or 'Pycha' in i:
+                move += 'mv ' + i + dir
+                archivo += i
+                os.system(move)
+
+        dir_new2 = dir + archivo
+        run = 'sh ' + dir_new2 + 'pycharm.sh'
+        os.system(run)
+
 
 class Idea:
     def __init__(self,url,files):

@@ -1,4 +1,1 @@
 tar -xzvf datagrip-2020.3.2.tar.gz;
-mv DataGrip-2020.3.2 /home
-sh DataGrip-2020.3.2/bin/datagrip.sh;
-sudo rm -r datagrip-2020.3.2.tar.gz;

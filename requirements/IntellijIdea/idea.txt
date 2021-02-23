@@ -1,4 +1,1 @@
 tar -xzvf ideaIU-2020.3.2.tar.gz;
-mv ideaIU-2020.3.2 /home;
-sh /home/ideaIU-2020.3.2/bin/idea.sh;
-sudo rm -r ideaIU-2020.3.2;

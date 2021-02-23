@@ -1,3 +1,1 @@
-tar -xzvf bin/pycharm-professional-2020.3.3.tar.gz;
-cd bin/pycharm-2020.3.3/bin;
-sh pycharm.sh;
+tar -xzvf pycharm-professional-2020.3.3.tar.gz;
